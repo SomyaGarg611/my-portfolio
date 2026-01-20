@@ -347,6 +347,15 @@ export const projects = {
       description:
         "A free streaming application ensuring cross-device compatibility and integrating the TMDB API for real-time updates. Implemented advanced search, filters, trailer modals, and server-side streaming support.",
       image: null,
+      images: [
+        "/projects/cinemic/cinemic-home.png",
+        "/projects/cinemic/cinemic-movies.png",
+        "/projects/cinemic/cinemic-tv.png",
+        "/projects/cinemic/cinemic-trending.png",
+        "/projects/cinemic/cinemic-movie-tv-desc.png",
+        "/projects/cinemic/play-trailer.png",
+        "/projects/cinemic/cinemic-footer.png",
+      ],
       imageGradient: "from-blue-500 to-purple-600",
       tags: ["React.js", "Redux", "JavaScript", "TMDB API", "REST APIs"],
       category: "Frontend",
