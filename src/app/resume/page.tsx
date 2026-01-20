@@ -84,12 +84,25 @@ const skills = {
 };
 
 const certifications = [
-  "AWS Certified Cloud Practitioner – Amazon Web Services, 2025",
+  {
+    name: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    year: "2025",
+    certificateUrl: "/AWS Certified Cloud Practitioner certificate.pdf"
+  }
 ];
 
 const achievements = [
-  "IEEE Research Paper – Published Email Classifier Using NLP and ML in IEEE at 2024 1st International Conference on ACET",
-  "Rising Star Award – Awarded to top 2% performers at HashedIn for accelerating delivery by 20%",
+  {
+    title: "IEEE Research Paper",
+    description: "Published Email Classifier Using NLP and ML in IEEE at 2024 1st International Conference on ACET",
+    url: "https://ieeexplore.ieee.org/document/10730368"
+  },
+  {
+    title: "Rising Star Award",
+    description: "Awarded to top 2% performers at HashedIn for accelerating delivery by 20%",
+    url: "https://www.linkedin.com/posts/somyagarg611_spot-award-activity-7313749886120669184-if0_?utm_source=share&utm_medium=member_desktop&rcm=ACoAADcZFg0Bxak9KY-298wrpjMxPRKNVfZoosg"
+  }
 ];
 
 // Calculate duration between two dates
@@ -247,7 +260,7 @@ export default function ResumePage() {
                     </span>
                     <span className="inline-flex items-center">
                       <Calendar className="w-3.5 h-3.5 mr-1" />
-                      Aug 2022 - Present · {calculateDuration("2022-08-01", "Present")}
+                      April 2024 - Present · {calculateDuration("2024-04-01", "Present")}
                     </span>
                   </div>
 
@@ -265,14 +278,19 @@ export default function ResumePage() {
                         if (dateStr === "Present") return "Present";
                         const [month, year] = dateStr.split(' ');
                         const monthMap: { [key: string]: string } = {
+                          'January': '01', 'February': '02', 'March': '03', 'April': '04',
+                          'May': '05', 'June': '06', 'July': '07', 'August': '08',
+                          'September': '09', 'October': '10', 'November': '11', 'December': '12',
                           'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
-                          'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+                          'Jun': '06', 'Jul': '07', 'Aug': '08',
                           'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
                         };
                         return `${year}-${monthMap[month]}-01`;
                       };
                       
-                      const duration = calculateDuration(parseDate(startDate), parseDate(endDate));
+                      const startStr = parseDate(startDate);
+                      const endStr = parseDate(endDate);
+                      const duration = calculateDuration(startStr, endStr);
                       
                       return (
                         <div key={index} className="relative pl-8 pb-8 last:pb-0">
@@ -389,11 +407,31 @@ export default function ResumePage() {
                   </h3>
                   <ul className="space-y-2">
                     {certifications.map((cert, index) => (
-                      <li key={index} className="flex items-start group">
-                        <div className="w-2 h-2 bg-gradient-to-br from-primary to-accent rounded-full mr-3 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
-                        <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                          {cert}
-                        </span>
+                      <li key={index} className="flex items-start justify-between group">
+                        <div className="flex items-start flex-1">
+                          <div className="w-2 h-2 bg-gradient-to-br from-primary to-accent rounded-full mr-3 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
+                          <div className="flex-1">
+                            <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                              {cert.name} – {cert.issuer}, {cert.year}
+                            </span>
+                          </div>
+                        </div>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          asChild
+                          className="text-xs bg-pink-400/10 border border-pink-400/20 backdrop-blur-sm border border-border/40 shadow-sm hover:bg-background/70 transition-all ml-2"
+                        >
+                          <Link
+                            href={cert.certificateUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-pink-300"
+                          >
+                            <ExternalLink className="w-4 h-4 mr-2 text-pink-300" />
+                            View Certificate
+                          </Link>
+                        </Button>
                       </li>
                     ))}
                   </ul>
@@ -406,11 +444,31 @@ export default function ResumePage() {
                   </h3>
                   <ul className="space-y-2">
                     {achievements.map((achievement, index) => (
-                      <li key={index} className="flex items-start group">
-                        <div className="w-2 h-2 bg-gradient-to-br from-primary to-accent rounded-full mr-3 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
-                        <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                          {achievement}
-                        </span>
+                      <li key={index} className="flex items-start justify-between group">
+                        <div className="flex items-start flex-1">
+                          <div className="w-2 h-2 bg-gradient-to-br from-primary to-accent rounded-full mr-3 mt-2 flex-shrink-0 group-hover:scale-125 transition-transform" />
+                          <div className="flex-1">
+                            <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                              <strong>{achievement.title}</strong> – {achievement.description}
+                            </span>
+                          </div>
+                        </div>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          asChild
+                          className="text-xs bg-pink-400/10 border border-pink-400/20 backdrop-blur-sm border border-border/40 shadow-sm hover:bg-background/70 transition-all ml-2"
+                        >
+                          <Link
+                            href={achievement.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-pink-300"
+                          >
+                            <ExternalLink className="w-4 h-4 mr-2 text-pink-300" />
+                            View
+                          </Link>
+                        </Button>
                       </li>
                     ))}
                   </ul>
