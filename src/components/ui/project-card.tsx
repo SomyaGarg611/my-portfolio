@@ -23,6 +23,7 @@ export interface ProjectData {
   githubHref: string;
   image: string; // Single image fallback
   images?: string[]; // Multiple images for slideshow
+  imageGradient?: string; // Gradient placeholder when no image
 }
 
 interface ProjectCardProps {
@@ -53,13 +54,24 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               interval={3000}
               aspectRatio="video"
             />
-          ) : (
+          ) : project.image && project.image !== "/file.svg" ? (
             <Image
               src={project.image}
               alt={project.title}
               fill
               className="object-contain transition-transform duration-500 group-hover:scale-105 p-2"
             />
+          ) : (
+            <div className={`w-full h-full bg-gradient-to-br ${project.imageGradient || 'from-gray-600 to-gray-700'} flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-300 relative`}>
+              <div className="text-white text-center p-4 z-10">
+                <div className="mb-3 opacity-80">
+                  <project.icon className="w-8 h-8" />
+                </div>
+                <h3 className="font-bold text-sm mb-1 line-clamp-2">{project.title}</h3>
+                <p className="text-xs opacity-80">{project.status}</p>
+              </div>
+              <div className="absolute inset-0 bg-black/20"></div>
+            </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           

@@ -43,6 +43,7 @@ const projects: ProjectData[] = projectsData.projects
       githubHref: github,
       image: p.image || "/file.svg",
       images: (p as any).images, // Pass through the images array for slideshow
+      imageGradient: p.imageGradient, // Pass through gradient for fallback
     } as ProjectData;
   });
 
