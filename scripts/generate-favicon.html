@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #0f172a;
+            color: white;
+        }
+        canvas { 
+            border: 1px solid #22d3ee; 
+            margin: 10px;
+            background: white;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .size-group {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Somya Garg - Favicon Generator</h1>
+    <p>Right-click on any canvas below and "Save image as..." to get the favicon in different sizes.</p>
+    
+    <div class="container">
+        <div class="size-group">
+            <h3>16x16 (favicon.ico)</h3>
+            <canvas id="canvas16" width="16" height="16"></canvas>
+        </div>
+        
+        <div class="size-group">
+            <h3>32x32</h3>
+            <canvas id="canvas32" width="32" height="32"></canvas>
+        </div>
+        
+        <div class="size-group">
+            <h3>48x48</h3>
+            <canvas id="canvas48" width="48" height="48"></canvas>
+        </div>
+        
+        <div class="size-group">
+            <h3>64x64</h3>
+            <canvas id="canvas64" width="64" height="64"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function drawFavicon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            const scale = size / 32;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Background gradient
+            const bgGradient = ctx.createLinearGradient(0, 0, size, size);
+            bgGradient.addColorStop(0, '#0f172a');
+            bgGradient.addColorStop(1, '#1e1b4b');
+            
+            // Draw background with rounded corners
+            ctx.fillStyle = bgGradient;
+            ctx.beginPath();
+            ctx.roundRect(2 * scale, 2 * scale, (size - 4) * scale, (size - 4) * scale, 8 * scale);
+            ctx.fill();
+            
+            // Border gradient
+            const borderGradient = ctx.createLinearGradient(0, 0, size, size);
+            borderGradient.addColorStop(0, '#22d3ee');
+            borderGradient.addColorStop(0.5, '#8b5cf6');
+            borderGradient.addColorStop(1, '#ec4899');
+            
+            ctx.strokeStyle = borderGradient;
+            ctx.lineWidth = 1 * scale;
+            ctx.stroke();
+            
+            // SG text
+            ctx.fillStyle = '#22d3ee';
+            ctx.font = `bold ${Math.max(12, size * 0.4)}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            if (size >= 32) {
+                ctx.fillText('SG', size / 2, size / 2);
+            } else {
+                // For very small sizes, just use a simple dot pattern
+                ctx.fillStyle = '#22d3ee';
+                ctx.beginPath();
+                ctx.arc(size / 2, size / 2, size / 6, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Tech accent dot
+            if (size >= 24) {
+                ctx.fillStyle = '#22d3ee';
+                ctx.globalAlpha = 0.8;
+                ctx.beginPath();
+                ctx.arc(size - 6 * scale, 6 * scale, 1.5 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+        
+        // Generate all sizes
+        drawFavicon(document.getElementById('canvas16'), 16);
+        drawFavicon(document.getElementById('canvas32'), 32);
+        drawFavicon(document.getElementById('canvas48'), 48);
+        drawFavicon(document.getElementById('canvas64'), 64);
+        
+        // Add download functionality
+        document.querySelectorAll('canvas').forEach(canvas => {
+            canvas.addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.download = `favicon-${canvas.width}x${canvas.height}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>
