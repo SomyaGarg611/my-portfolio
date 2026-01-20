@@ -104,7 +104,7 @@ export const contact = {
     {
       title: "Location",
       description: "Based in Bangalore, India",
-      value: "Available for remote work globally",
+      value: "Open to remote, hybrid, and 5-days-a-week models",
       icon: MapPin,
       action: null,
       primary: false,
@@ -151,6 +151,7 @@ export const experience = {
       ],
       technologies: [
         "Python",
+        "JavaScript",
         "LangChain",
         "Streamlit",
         "Node.js",
@@ -175,6 +176,7 @@ export const experience = {
       ],
       technologies: [
         "React.js",
+        "JavaScript",
         "Spring Boot",
         "JWT",
         "PostgreSQL",
@@ -263,6 +265,7 @@ export const experience = {
   skills: {
     technical: [
       { name: "Python", level: 95 },
+      { name: "JavaScript", level: 90 },
       { name: "React.js", level: 90 },
       { name: "Node.js", level: 90 },
       { name: "LangChain", level: 90 },
