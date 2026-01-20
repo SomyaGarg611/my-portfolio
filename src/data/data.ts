@@ -373,6 +373,10 @@ export const projects = {
           type: "live",
           url: "https://cinemic.vercel.app/",
         },
+        {
+          type: "github",
+          url: "https://github.com/SomyaGarg611/cinemic",
+        },
       ],
       overview: "Cinemic is a free streaming platform offering cross-device compatibility with real-time movie and TV series updates powered by TMDB API.",
       challenge: "Create a modern, responsive streaming platform that provides free access to movies and TV series with real-time updates while maintaining fast load times and an intuitive user experience across all devices.",
@@ -400,7 +404,7 @@ export const projects = {
         "Tools": ["Git", "npm"]
       },
       liveUrl: "https://cinemic.vercel.app/",
-      githubUrl: "#"
+      githubUrl: "https://github.com/SomyaGarg611/cinemic"
     },
     // {
     //   id: "sgstore",

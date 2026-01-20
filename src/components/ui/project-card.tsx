@@ -156,7 +156,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 Live Demo
               </span>
             ) : (
-              <a href={project.liveHref} target="_blank" rel="noopener noreferrer">
+              <a href={project.liveHref || "#"} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Live Demo
               </a>
@@ -175,7 +175,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 GitHub
               </span>
             ) : (
-              <a href={project.githubHref} target="_blank" rel="noopener noreferrer">
+              <a href={project.githubHref || "#"} target="_blank" rel="noopener noreferrer">
                 <Github className="w-4 h-4 mr-2" />
                 GitHub
               </a>
